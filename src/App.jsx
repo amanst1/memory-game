@@ -9,7 +9,7 @@ function App() {
   const images = []
 
   for( let i = 0; i < 13; i++) {
-    images.push[<ImageComponent/>]
+    images.push(<ImageComponent/>)
   }
   console.log(images)
   return (
@@ -17,6 +17,11 @@ function App() {
       <h1> Did I click on that...?</h1>
       <h3>Your Score: { score }</h3>
       <h4>Highscore: { bestScore } </h4>
+      
+      <div>
+        {images}
+      </div>
+
     </>
   )
 }
