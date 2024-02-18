@@ -1,7 +1,7 @@
 import {v4 as uuidv4} from 'uuid'
 
 const numbers = []
-    
+ // Generate unique random numbers for image fetching   
 while (numbers.length < 13) {
     const num = Math.floor(Math.random() * 100) + 1;
     if(numbers.includes(num)) {

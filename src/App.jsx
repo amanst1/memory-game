@@ -7,6 +7,7 @@ function App() {
   const [score, setScore] = useState(0)
   const [bestScore, setBestScore] = useState(0)
   const [clicked, setClicked] = useState([])
+  const [start, setStart] = useState(true)
 
   const images = []
 
@@ -15,9 +16,12 @@ function App() {
         setClicked( prev => [...prev, componentId] )
         setScore(score => score + 1)
         setBestScore(bestScore => bestScore + 1)
-      }  
+      }  else {
+        setStart(false)
+      }
   }
-  console.log(clicked)
+  
+  //
   pokemons.map(pokemon => {
     images.push(<ImageComponent 
       key={pokemon.id}  id={pokemon.id} url={pokemon.url}
@@ -29,11 +33,18 @@ function App() {
       <h1> Did I click on that...?</h1>
       <h3>Your Score: { score }</h3>
       <h4>Highscore: { bestScore } </h4>
-      
-      <div>
-        {images}
-      </div>
 
+      {start ?
+        (<div>
+          {images}
+        </div>) :
+        (
+          <div>
+            <h1>Game Over</h1>
+            <button onClick={() => setStart(true)}> New Game </button>
+          </div>
+        )
+      }
     </>
   )
 }
