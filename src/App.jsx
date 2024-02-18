@@ -7,17 +7,27 @@ function App() {
   const [score, setScore] = useState(0)
   const [bestScore, setBestScore] = useState(0)
   const [clicked, setClicked] = useState([])
-  const [start, setStart] = useState(true)
+  const [status, setStatus] = useState('')
 
   const images = []
 
+  const resetGame = () => {
+    setScore(0)
+    setStatus('')
+    setClicked([])
+  }
+
   const handleClick = (componentId) => {
+      
       if(!clicked.includes(componentId)) {
         setClicked( prev => [...prev, componentId] )
         setScore(score => score + 1)
         setBestScore(bestScore => bestScore + 1)
+        if(score === 11) {
+          setStatus('victory')
+        }
       }  else {
-        setStart(false)
+        setStatus('loss')
       }
   }
   
@@ -34,17 +44,21 @@ function App() {
       <h3>Your Score: { score }</h3>
       <h4>Highscore: { bestScore } </h4>
 
-      {start ?
-        (<div>
-          {images}
-        </div>) :
-        (
-          <div>
+      {status === '' &&
+        (<div style={{display: 'flex', 'flex-flow': 'row wrap'}}>
+          
+            {images}
+          
+        </div>) } 
+        
+      {status === 'loss' &&
+          (<div>
             <h1>Game Over</h1>
-            <button onClick={() => setStart(true)}> New Game </button>
-          </div>
-        )
+            <button onClick={() => resetGame()}> New Game </button>
+          </div>)  
       }
+
+      {status === 'victory' && <h1>Congratulations! You&apos;ve won. </h1> }
     </>
   )
 }

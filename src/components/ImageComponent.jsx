@@ -1,4 +1,5 @@
 /* eslint-disable react/prop-types */
+import '../App.css'
 import { useEffect, useState } from "react"
 
 export default function ImageComponent({id, url, onClick}) {
@@ -12,7 +13,7 @@ export default function ImageComponent({id, url, onClick}) {
     }, [url])
 
     return (
-        <div onClick={() => onClick(id)}>
+        <div className='images' onClick={() => onClick(id)}>
             
             <h2>{ pokemon?.name?.toUpperCase() }</h2>
             
