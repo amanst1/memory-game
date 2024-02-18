@@ -33,7 +33,6 @@ function App() {
     setScore(0)
     setStatus('')
     setClicked([])
-    window.location.reload()
   }
 
   const handleClick = (componentId) => {
@@ -41,13 +40,13 @@ function App() {
       if(!clicked.includes(componentId)) {
         setClicked( prev => [...prev, componentId] );
         setScore(score => score + 1);
-        (score >= bestScore) ? setBestScore(bestScore => bestScore + 1) : '';
         shuffle(pokemons);
         if(score === 11) {
           setStatus('victory')
         }
       }  else {
         setStatus('loss')
+        score >= bestScore && setBestScore(score)
       }
   }
 
@@ -63,20 +62,19 @@ function App() {
   return (
     <>
       <h1> Did I click on that...?</h1>
-      <h3>Your Score: { score }</h3>
-      <h4>Highscore: { bestScore } </h4>
+      <p>Click on all images only once to win.</p>
+      <h2>Your Score: { score }</h2>
+      <h3>Highscore: { bestScore } </h3>
 
       {status === '' &&
         (<div style={{display: 'flex', 'flex-flow': 'row wrap', 'justifyContent':'center'}}>
-          
             {images}
-          
         </div>) } 
         
       {status === 'loss' &&
           (<div>
             <h1>Game Over</h1>
-            <button onClick={() => resetGame()}> New Game </button>
+            <button onClick={() => resetGame()}> Try Again! </button>
           </div>)  
       }
 
