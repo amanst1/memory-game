@@ -1,13 +1,24 @@
 /* eslint-disable react/prop-types */
 
-export default function ImageComponent({id, children, onClick}) {
+import { useEffect, useState } from "react"
 
+export default function ImageComponent({id, url, onClick}) {
+    const [pokemon, setPokemon] = useState({})
+    
 
+    useEffect(()=>{
+       fetch(url)
+        .then(response => response.json())
+        .then(json => setPokemon(json))
+    }, [url])
 
     return (
-        <>
-            <h2 onClick={() => onClick(id)}>Image Component {children}</h2>
+        <div onClick={() => onClick(id)}>
+            
+            <h2>{ pokemon?.name.toUpperCase() }</h2>
+            
+            <img src={ pokemon?.sprites?.front_default } alt="pokemon image" />
         
-        </>
+        </div>
     )
 }

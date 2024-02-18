@@ -19,7 +19,9 @@ function App() {
   }
   console.log(clicked)
   pokemons.map(pokemon => {
-    images.push(<ImageComponent key={pokemon.id}  id={pokemon.id} onClick={(id) => handleClick(id)}> {pokemon.url} </ImageComponent>)
+    images.push(<ImageComponent 
+      key={pokemon.id}  id={pokemon.id} url={pokemon.url}
+      onClick={(id) => handleClick(id)} /> )
   })
   
   return (
