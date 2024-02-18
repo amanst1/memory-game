@@ -62,7 +62,7 @@ function App() {
   return (
     <>
       <h1> Did I click on that...?</h1>
-      <p>Click on all images only once to win.</p>
+      <h4>Click on all images only once to win.</h4>
       <h2>Your Score: { score }</h2>
       <h3>Highscore: { bestScore } </h3>
 
