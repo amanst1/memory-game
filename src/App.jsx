@@ -1,17 +1,27 @@
+import pokemons from '../src/pokemons.js'
 import { useState } from 'react'
 import './App.css'
 import ImageComponent from './components/ImageComponent'
 
 function App() {
-  const [score, setCount] = useState(0)
+  const [score, setScore] = useState(0)
   const [bestScore, setBestScore] = useState(0)
+  const [clicked, setClicked] = useState([])
 
   const images = []
 
-  for( let i = 0; i < 13; i++) {
-    images.push(<ImageComponent/>)
+  const handleClick = (componentId) => {
+      if(!clicked.includes(componentId)) {
+        setClicked( prev => [...prev, componentId] )
+        setScore(score => score + 1)
+        setBestScore(bestScore => bestScore + 1)
+      }  
   }
-  console.log(images)
+  console.log(clicked)
+  pokemons.map(pokemon => {
+    images.push(<ImageComponent key={pokemon.id}  id={pokemon.id} onClick={(id) => handleClick(id)}> {pokemon.url} </ImageComponent>)
+  })
+  
   return (
     <>
       <h1> Did I click on that...?</h1>

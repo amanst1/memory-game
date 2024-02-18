@@ -1,8 +1,13 @@
+/* eslint-disable react/prop-types */
 
-export default function ImageComponent() {
+export default function ImageComponent({id, children, onClick}) {
+
+
+
     return (
         <>
-            <h2>Image Component</h2>
+            <h2 onClick={() => onClick(id)}>Image Component {children}</h2>
+        
         </>
     )
 }
